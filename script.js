@@ -1,5 +1,8 @@
 let playerScore = 0;
 let compScore = 0;
+const winCondition = 5;
+
+console.log("First to " + winCondition + " wins the match.")
 
 function getCompChoice() {
     // First get random integer 0, 1, or 2
@@ -80,7 +83,15 @@ function playRound() {
 }
 
 function playGame() {
-    playRound();
+    // First to x points wins
+    while (!(playerScore == winCondition || compScore == winCondition)) {
+        playRound();
+    }
+    if (playerScore == winCondition) {
+        console.log("Congrats, you win the match")
+    } else {
+        console.log("Sorry, you lose the match")
+    }
 }
 
 playGame();
