@@ -41,8 +41,8 @@ function getPlayerChoice() {
 
 function playRound() {
     // Call choice functions and assign comp and player choices to variables
-    let compSelection = getCompChoice();
-    let playerSelection = getPlayerChoice();
+    const compSelection = getCompChoice();
+    const playerSelection = getPlayerChoice();
     
     console.log("Computer: " + compSelection + "     You: " + playerSelection);
 
@@ -52,26 +52,26 @@ function playRound() {
     } else if (playerSelection == "rock") {
         if (compSelection == "paper") {
             compScore++;
-            console.log("You lose");
+            console.log("You lose this round");
         } else {
             playerScore++;
-            console.log("You win");
+            console.log("You win this round");
         }
     } else if (playerSelection == "paper") {
         if (compSelection == "scissors") {
             compScore++;
-            console.log("You lose");
+            console.log("You lose this round");
         } else {
             playerScore++;
-            console.log("You win");
+            console.log("You win this round");
         }
     } else if (playerSelection == "scissors") {
         if (compSelection == "rock") {
             compScore++;
-            console.log("You lose");
+            console.log("You lose this round");
         } else {
             playerScore++;
-            console.log("You win");
+            console.log("You win this round");
         }
     }
     
