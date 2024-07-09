@@ -1,3 +1,6 @@
+// Simple rock paper scissors game played in the console
+
+// Define global score variables and number of points needed to win
 let playerScore = 0;
 let compScore = 0;
 const winCondition = 5;
@@ -5,6 +8,7 @@ const winCondition = 5;
 console.log("First to " + winCondition + " wins the match.")
 
 function getCompChoice() {
+    // Function to randomly determine the computer's RPS choice
     // First get random integer 0, 1, or 2
     let compChoice = Math.floor(Math.random() * 3);
 
@@ -25,7 +29,8 @@ function getCompChoice() {
 }
 
 function getPlayerChoice() {
-    // Prompt player for RPS choice, then trim whitespace and make lower case
+    // Function to determine the player's RPS choice
+    // Prompt player for choice, then trim whitespace and make lower case
     let playerChoice =
         prompt("Enter your choice: rock, paper, or scissors").trim().toLowerCase();
 
@@ -43,13 +48,16 @@ function getPlayerChoice() {
 }
 
 function playRound() {
+    // Function to compare choices between computer and player and increment
+    // scores accordingly
+    
     // Call choice functions and assign comp and player choices to variables
     const compSelection = getCompChoice();
     const playerSelection = getPlayerChoice();
     
     console.log("Computer: " + compSelection + "     You: " + playerSelection);
 
-    // Determine results and adjust scores
+    // Compare results and increment scores (unless a draw occurs)
     if (playerSelection == compSelection) {
         console.log("Result = Draw")
     } else if (playerSelection == "rock") {
@@ -83,7 +91,8 @@ function playRound() {
 }
 
 function playGame() {
-    // First to x points wins
+    // First to the number of points equal to the value of winCondition wins
+    // If neither comp nor player has enough points, keep playing
     while (!(playerScore == winCondition || compScore == winCondition)) {
         playRound();
     }
