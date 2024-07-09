@@ -4,8 +4,8 @@
 
 A primitive rock, paper, scissors project played in the console (may update in the future with a GUI).
 
-Made as an assignment when following [The Odin Project](https://www.theodinproject.com).
+This was made as an assignment for [The Odin Project](https://www.theodinproject.com).
 
 ## Links
 
-[Include links here later. WIP]
+[Link to RPS game](https://joshjyu.github.io/rock-paper-scissors/)
