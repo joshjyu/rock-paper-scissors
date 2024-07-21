@@ -1,106 +1,84 @@
+const winCondition = 5;
 let playerScore = 0;
 let computerScore = 0;
-const winCondition = 5;
 
-console.log("First to " + winCondition + " wins the match.");
+const winConditionStatement = document.querySelector(".winCondition");
+winConditionStatement.textContent = `The first to win ${winCondition} rounds is the winner.`;
 
-function getCompChoice() {
-  // Function to randomly determine the computer's RPS choice
+let playerChoice;
+let compChoice;
+let buttonWrapper = document.querySelector(".buttonWrapper");
 
-  // Get random integer 0, 1, or 2
-  let compChoice = Math.floor(Math.random() * 3);
+buttonWrapper.addEventListener("click", (event) => {
+  let target = event.target;
 
-  switch (compChoice) {
-    case 0:
-      compChoice = "rock";
+  compChoice = Math.floor(Math.random() * 3);
+
+  switch (target.id) {
+    case "rock":
+      playerChoice = 0;
+      playRound();
       break;
-    case 1:
-      compChoice = "paper";
+    case "paper":
+      playerChoice = 1;
+      playRound();
       break;
-    case 2:
-      compChoice = "scissors";
+    case "scissors":
+      playerChoice = 2;
+      playRound();
       break;
   }
+});
 
-  return compChoice;
-}
-
-function getPlayerChoice() {
-  // Function to determine the player's RPS choice
-
-  let playerChoice = prompt("Enter your choice: rock, paper, or scissors")
-    .trim()
-    .toLowerCase();
-
-  // If player doesn't enter a valid choice, keep prompting
-  while (
-    !(
-      playerChoice == "rock" ||
-      playerChoice == "paper" ||
-      playerChoice == "scissors"
-    )
-  ) {
-    playerChoice = prompt("Please enter either: rock, paper, or scissors");
-    playerChoice = playerChoice.trim().toLowerCase();
-  }
-
-  return playerChoice;
-}
+let result = document.querySelector("#result");
+let score = document.querySelector("#score");
+let showChoices = document.querySelector("#showChoices");
+let winnerDecl = document.createElement("p");
+let roundCount = 1;
+showChoices.setAttribute("style", "white-space: pre;");
+score.setAttribute("style", "white-space: pre;");
+winnerDecl.style.cssText = "font-weight: bold;";
 
 function playRound() {
-  // Function to compare choices between computer and player and increment
-  // scores accordingly
+  showChoices.textContent = `Round Number ${roundCount}\r\n\r\n`;
+  showChoices.textContent += `Computer choice: ${compChoice}\r\n`;
+  showChoices.textContent += `Player choice: ${playerChoice}`;
 
-  const compSelection = getCompChoice();
-  const playerSelection = getPlayerChoice();
-
-  console.log("Computer: " + compSelection + "     You: " + playerSelection);
-
-  // Compare results and increment scores (unless a draw occurs)
-  if (playerSelection == compSelection) {
-    console.log("This round is a draw");
-  } else if (playerSelection == "rock") {
-    if (compSelection == "paper") {
-      computerScore++;
-      console.log("You lose this round");
-    } else {
-      playerScore++;
-      console.log("You win this round");
-    }
-  } else if (playerSelection == "paper") {
-    if (compSelection == "scissors") {
-      computerScore++;
-      console.log("You lose this round");
-    } else {
-      playerScore++;
-      console.log("You win this round");
-    }
-  } else if (playerSelection == "scissors") {
-    if (compSelection == "rock") {
-      computerScore++;
-      console.log("You lose this round");
-    } else {
-      playerScore++;
-      console.log("You win this round");
-    }
+  if (playerChoice == compChoice) {
+    result.textContent = "This round is a draw";
+  } else if (compChoice - playerChoice == 1) {
+    computerScore++;
+    result.textContent = "You lose this round";
+  } else if (compChoice - playerChoice == -1) {
+    playerScore++;
+    result.textContent = "You win this round";
+  } else if (compChoice - playerChoice == 2) {
+    playerScore++;
+    result.textContent = "You win this round";
+  } else if (compChoice - playerChoice == -2) {
+    computerScore++;
+    result.textContent = "You lose this round";
   }
 
-  console.log(
-    "Your score = " + playerScore + "     Computer score = " + computerScore,
-  );
+  roundCount++;
+  score.textContent = `Computer score = ${computerScore}\r\n`;
+  score.textContent += `Player score = ${playerScore}`;
+
+  if (playerScore == winCondition || computerScore == winCondition)
+    checkWinner();
 }
 
-function playGame() {
-  // If neither comp nor player has enough points to
-  // satisfy winCondition, keep playing
-  while (!(playerScore == winCondition || computerScore == winCondition)) {
-    playRound();
+function checkWinner() {
+  const allButtons = document.querySelectorAll("button");
+  for (let i = 0; i < allButtons.length; i++) {
+    allButtons[i].disabled = true;
   }
+
   if (playerScore == winCondition) {
-    console.log("Congrats, you win the match");
+    winnerDecl.textContent = "You win the match";
   } else {
-    console.log("Sorry, you lose the match");
+    winnerDecl.textContent = "You lose the match";
   }
-}
 
-playGame();
+  score.appendChild(winnerDecl);
+}
