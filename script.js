@@ -30,6 +30,7 @@ buttonWrapper.addEventListener("click", (event) => {
   }
 });
 
+const choices = ["rock", "paper", "scissors"];
 let result = document.querySelector("#result");
 let score = document.querySelector("#score");
 let showChoices = document.querySelector("#showChoices");
@@ -41,8 +42,8 @@ winnerDecl.style.cssText = "font-weight: bold;";
 
 function playRound() {
   showChoices.textContent = `Round Number ${roundCount}\r\n\r\n`;
-  showChoices.textContent += `Computer choice: ${compChoice}\r\n`;
-  showChoices.textContent += `Player choice: ${playerChoice}`;
+  showChoices.textContent += `Computer choice: ${choices[compChoice]}\r\n`;
+  showChoices.textContent += `Player choice: ${choices[playerChoice]}`;
 
   if (playerChoice == compChoice) {
     result.textContent = "This round is a draw";
