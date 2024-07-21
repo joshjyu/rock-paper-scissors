@@ -2,7 +2,7 @@
 
 ## About
 
-A primitive rock, paper, scissors project played in the console (may update in the future with a GUI).
+A rock, paper, scissors project with a primitive GUI.
 
 This was made as an assignment for [The Odin Project](https://www.theodinproject.com).
 
