@@ -1,4 +1,4 @@
-# Rock, Paper, Scissors - a Javascript Project
+# Rock, Paper, Scissors - a JavaScript Project
 
 ## About
 
